@@ -4,6 +4,7 @@ module.exports = {
   async index(req, res) {
     try {
       const { id } = req.params
+
       const user = await User.findByPk(id)
 
       return res.json(user)
@@ -15,6 +16,7 @@ module.exports = {
   async store(req, res) {
     try {
       const { name, user_name, email, password } = req.body
+
       const user = await User.create({
         name,
         user_name,
@@ -32,6 +34,7 @@ module.exports = {
     try {
       const { id } = req.params
       const { name, user_name, email, password } = req.body
+
       const user = await User.findByPk(id)
       await user.update({
         name,
@@ -49,6 +52,7 @@ module.exports = {
   async destroy(req, res) {
     try {
       const { id } = req.params
+
       const user = await User.findByPk(id)
       await user.destroy()
 

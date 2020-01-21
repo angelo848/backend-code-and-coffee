@@ -4,10 +4,17 @@ const Post = require('../models/Post')
 module.exports = {
   async index(req, res) {
     try {
-      const { author_id } = req.params
+      const { author_id, post_id } = req.params
 
+      // Se a rota possuir um ID do post, ela retorna o post específico
+      if (post_id) {
+        const post = await Post.findByPk(post_id)
+
+        return res.json(post)
+      }
+
+      // Se a rota não possuir um ID do autor, ela retornará todos os posts
       if (!author_id) {
-        // Se a rota não possuir um ID do autor, ela retornará todos os posts
         const posts = await Post.findAll()
 
         return res.json(posts)

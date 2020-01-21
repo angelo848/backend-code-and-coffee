@@ -12,6 +12,7 @@ routes.delete('/users/:id', UserController.destroy)
 
 // Post routes
 routes.get('/posts', PostController.index)
+routes.get('/posts/:id', PostController.index)
 routes.get('/users/:author_id/posts', PostController.index)
 routes.post('/users/:author_id/posts', PostController.store)
 routes.put('/posts/:id', PostController.update)

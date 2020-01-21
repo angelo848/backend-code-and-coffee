@@ -14,7 +14,7 @@
 // PRODUCTION DB
 module.exports = {
   dialect: 'mysql',
-  host: process.env.CLEARDB_DATABASE_URL,
+  host: 'us-cdbr-iron-east-05.cleardb.net',
   username: 'bc13c138ab156a',
   password: '9dc84451',
   database: 'heroku_46fa3a170055a33'

@@ -6,7 +6,8 @@ class Post extends Model {
       {
         title: DataTypes.STRING,
         thumb_url: DataTypes.STRING,
-        content: DataTypes.STRING
+        content: DataTypes.STRING,
+        category: DataTypes.STRING
       },
       {
         sequelize

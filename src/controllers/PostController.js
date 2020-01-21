@@ -27,7 +27,7 @@ module.exports = {
   async store(req, res) {
     try {
       const { author_id } = req.params
-      const { title, thumb_url, content } = req.body
+      const { title, thumb_url, content, category } = req.body
 
       const user = await User.findByPk(author_id)
 
@@ -39,7 +39,8 @@ module.exports = {
         author_id,
         title,
         thumb_url,
-        content
+        content,
+        category
       })
 
       return res.json(post)
@@ -52,10 +53,15 @@ module.exports = {
   async update(req, res) {
     try {
       const { id } = req.params
-      const { title, thumb_url, content } = req.body
+      const { title, thumb_url, content, category } = req.body
 
       const post = await Post.findByPk(id)
-      await post.update({ title, thumb_url, content })
+      await post.update({
+        title,
+        thumb_url,
+        content,
+        category
+      })
 
       return res.json(post)
     } catch (error) {

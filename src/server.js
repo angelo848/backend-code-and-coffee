@@ -8,6 +8,8 @@ if (process.env.NODE_ENV === 'development') {
 
 require('./database')
 
+const config = require('./config/database')
+
 const app = express()
 
 app.use(cors())

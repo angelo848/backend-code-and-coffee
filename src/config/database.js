@@ -14,8 +14,12 @@
 // PRODUCTION DB
 module.exports = {
   dialect: 'mysql',
-  host: process.env.DB_HOST || 'us-cdbr-iron-east-05.cleardb.net',
-  username: process.env.DB_USER || 'bc13c138ab156a',
-  password: process.env.DB_PASSWORD || '9dc84451',
-  database: 'heroku_46fa3a170055a33'
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  define: {
+    timestamps: true,
+    underscored: true
+  }
 }

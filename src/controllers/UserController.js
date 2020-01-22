@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const bcrypt = require('bcrypt')
 
 module.exports = {
   async index(req, res) {
@@ -16,12 +17,13 @@ module.exports = {
   async store(req, res) {
     try {
       const { name, user_name, email, password } = req.body
+      const encryptedPass = bcrypt.hashSync(password, 10)
 
       const user = await User.create({
         name,
         user_name,
         email,
-        password
+        password: encryptedPass
       })
 
       return res.json(user)

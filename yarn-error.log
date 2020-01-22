@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/lib/nodejs/node-v12.14.0-linux-x64/bin/node /usr/local/lib/nodejs/node-v12.14.0-linux-x64/bin/yarn
+  /usr/local/lib/nodejs/node-v12.14.0-linux-x64/bin/node /usr/local/lib/nodejs/node-v12.14.0-linux-x64/bin/yarn add bcrypt
 
 PATH: 
-  /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/lib/nodejs/node-v12.14.0-linux-x64/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/angelo/.zplugin/polaris/bin:/usr/local/lib/nodejs/node-v12.14.0-linux-x64/bin:(yarn global bin):/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/angelo/Android/Sdk/tools:/home/angelo/Android/Sdk/platform-tools:/usr/local/lib/flutter/bin:/home/angelo/Android/Sdk/tools:/home/angelo/Android/Sdk/platform-tools:/usr/local/lib/flutter/bin:(yarn global bin)
+  /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/lib/nodejs/node-v12.14.0-linux-x64/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/angelo/.zplugin/polaris/bin:/usr/local/lib/nodejs/node-v12.14.0-linux-x64/bin:/home/angelo/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/angelo/Android/Sdk/tools:/home/angelo/Android/Sdk/platform-tools:/usr/local/lib/flutter/bin:(yarn global bin):/home/angelo/Android/Sdk/tools:/home/angelo/Android/Sdk/platform-tools:/usr/local/lib/flutter/bin:(yarn global bin)
 
 Yarn version: 
   1.21.1
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/home/angelo/Documentos/code-and-coffee/backend/node_modules/.bin/cdl'
+  Error: EACCES: permission denied, mkdir '/home/angelo/Documentos/code-and-coffee/backend/node_modules/touch/node_modules/nopt'
 
 npm manifest: 
   {
@@ -23,10 +23,11 @@ npm manifest:
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-      "dev": "nodemon src/server.js",
+      "dev": "NODE_ENV=development nodemon src/server.js",
       "start": "node src/server.js"
     },
     "devDependencies": {
+      "dotenv": "^8.2.0",
       "nodemon": "^2.0.2"
     },
     "dependencies": {

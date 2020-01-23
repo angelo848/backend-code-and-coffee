@@ -1,5 +1,4 @@
 const User = require('../models/User')
-const bcrypt = require('bcrypt')
 
 module.exports = {
   async index(req, res) {
@@ -23,13 +22,12 @@ module.exports = {
   async store(req, res) {
     try {
       const { name, user_name, email, password } = req.body
-      const encryptedPass = bcrypt.hashSync(password, 8)
 
       const user = await User.create({
         name,
         user_name,
         email,
-        password: encryptedPass
+        password
       })
 
       return res.json(user)
@@ -44,17 +42,15 @@ module.exports = {
       const { name, user_name, email, old_password, new_password } = req.body
       const user = await User.findByPk(id)
 
-      if (!bcrypt.compareSync(old_password, user.password)) {
+      if (!(await user.checkPassword(old_password))) {
         return res.status(401).send({ message: 'Invalid password' })
       }
-
-      const encryptedPass = bcrypt.hashSync(new_password, 10)
 
       await user.update({
         name,
         user_name,
         email,
-        password: encryptedPass
+        password: new_password
       })
 
       return res.json(user)
@@ -76,7 +72,7 @@ module.exports = {
 
       const user = await User.findByPk(id)
 
-      if (!bcrypt.compareSync(password, user.password)) {
+      if (!(await user.checkPassword(password))) {
         return res.status(403).send({ error: 'Invalid password' })
       }
 

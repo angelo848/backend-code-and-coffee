@@ -1,5 +1,4 @@
 const User = require('../models/User')
-const bcypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 module.exports = {
@@ -13,7 +12,7 @@ module.exports = {
       }
 
       // Validate password
-      if (!bcypt.compareSync(password, user.password)) {
+      if (!(await user.checkPassword(password))) {
         return res.status(401).send({ error: 'User password wrong' })
       }
 

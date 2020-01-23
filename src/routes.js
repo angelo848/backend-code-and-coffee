@@ -6,6 +6,7 @@ const PostController = require('./controllers/PostController')
 const SessionController = require('./controllers/SessionController')
 
 // User routes
+routes.get('/users', UserController.index)
 routes.get('/users/:id', UserController.index)
 routes.post('/users', UserController.store)
 routes.put('/users/:id', UserController.update)

@@ -3,6 +3,7 @@ const express = require('express')
 const routes = express.Router()
 const UserController = require('./controllers/UserController')
 const PostController = require('./controllers/PostController')
+const SessionController = require('./controllers/SessionController')
 
 // User routes
 routes.get('/users/:id', UserController.index)
@@ -17,5 +18,9 @@ routes.get('/users/:author_id/posts', PostController.index)
 routes.post('/users/:author_id/posts', PostController.store)
 routes.put('/posts/:id', PostController.update)
 routes.delete('/posts/:id', PostController.destroy)
+
+// Session routes
+routes.post('/authenticate', SessionController.create)
+routes.use(SessionController.validate)
 
 module.exports = routes

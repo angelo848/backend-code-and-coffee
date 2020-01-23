@@ -14,7 +14,7 @@ module.exports = {
 
       // Validate password
       if (!bcypt.compareSync(password, user.password)) {
-        return res.status(403).send({ error: 'User password wrong' })
+        return res.status(401).send({ error: 'User password wrong' })
       }
 
       const token = jwt.sign(user.toJSON(), 'node-auth', {

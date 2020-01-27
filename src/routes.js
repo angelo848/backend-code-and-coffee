@@ -20,6 +20,10 @@ routes.post('/users/:author_id/posts', PostController.store)
 routes.put('/posts/:id', PostController.update)
 routes.delete('/posts/:id', PostController.destroy)
 
+routes.get('/', (req, res) => {
+  return res.send('ok')
+})
+
 // Session routes
 routes.post('/authenticate', SessionController.create)
 routes.use(SessionController.validate)

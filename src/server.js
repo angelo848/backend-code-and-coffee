@@ -15,3 +15,4 @@ app.use(express.json())
 app.use(routes)
 
 app.listen(process.env.PORT)
+console.log(`Server executing in port ${process.env.PORT}`)

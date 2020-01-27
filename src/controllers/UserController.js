@@ -42,7 +42,7 @@ module.exports = {
       const { name, user_name, email, old_password, new_password } = req.body
       const user = await User.findByPk(id)
 
-      if (!(await user.checkPassword(old_password))) {
+      if (old_password && !(await user.checkPassword(old_password))) {
         return res.status(401).send({ message: 'Invalid password' })
       }
 

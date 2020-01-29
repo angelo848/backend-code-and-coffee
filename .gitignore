@@ -1,4 +1,2 @@
 node_modules
 .env
-jest.config.js
-__tests__

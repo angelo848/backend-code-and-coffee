@@ -1,5 +1,5 @@
 const User = require('../models/User')
-const jwt = require('../utils/jwt')
+const jwt = require('../../utils/jwt')
 
 module.exports = {
   async index(req, res) {

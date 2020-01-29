@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const dbConfig = require('../config/database')
 
-const User = require('../models/User')
-const Post = require('../models/Post')
+const User = require('../app/models/User')
+const Post = require('../app/models/Post')
 
 const connection = new Sequelize(dbConfig)
 

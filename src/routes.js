@@ -1,9 +1,9 @@
 const express = require('express')
 
 const routes = express.Router()
-const UserController = require('./controllers/UserController')
-const PostController = require('./controllers/PostController')
-const SessionController = require('./controllers/SessionController')
+const UserController = require('./app/controllers/UserController')
+const PostController = require('./app/controllers/PostController')
+const SessionController = require('./app/controllers/SessionController')
 
 // User routes
 routes.get('/users', UserController.index)

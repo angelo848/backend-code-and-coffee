@@ -4,14 +4,7 @@ const Post = require('../models/Post')
 module.exports = {
   async index(req, res) {
     try {
-      const { author_id, post_id } = req.params
-
-      // Se a rota possuir um ID do post, ela retorna o post específico
-      if (post_id) {
-        const post = await Post.findByPk(post_id)
-
-        return res.json(post)
-      }
+      const { author_id } = req.params
 
       // Se a rota não possuir um ID do autor, ela retornará todos os posts
       if (!author_id) {
@@ -28,6 +21,23 @@ module.exports = {
       return res.json(author)
     } catch (error) {
       return res.status(500).send(error.toString())
+    }
+  },
+
+  async show(req, res) {
+    const { post_id } = req.params
+
+    try {
+      const post = await Post.findByPk(post_id)
+
+      if (!post) {
+        return res.status(404).send('Post not found')
+      }
+
+      return res.json(post)
+
+    } catch (error) {
+      return res.status(500).send(error)
     }
   },
 

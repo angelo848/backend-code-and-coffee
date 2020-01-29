@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon src/server.js",
+    "dev": "nodemon src/server.js",
     "start": "node src/server.js"
   },
   "devDependencies": {

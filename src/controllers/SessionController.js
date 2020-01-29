@@ -1,11 +1,15 @@
 const User = require('../models/User')
-const jwt = require('jsonwebtoken')
+const jwt = require('../utils/jwt')
 
 module.exports = {
   async create(req, res) {
+    const [, hash] = req.headers.authorization.split(' ')
+    const [user_name, password] = Buffer.from(hash, 'base64')
+      .toString()
+      .split(':')
+
     try {
-      const { user_name, password } = req.body
-      const user = await User.findOne({ where: { user_name } })
+      let user = await User.findOne({ where: { user_name } })
 
       if (!user) {
         return res.status(404).send({ error: 'Username not found' })
@@ -16,47 +20,32 @@ module.exports = {
         return res.status(401).send({ error: 'User password wrong' })
       }
 
-      const token = jwt.sign(user.toJSON(), 'node-auth', {
-        expiresIn: '2h'
-      })
+      const token = jwt.sign({ user: user.id })
 
       return res.json({
         user,
         token
       })
     } catch (error) {
-      return res.status(500).send(error.toString())
+      return res.status(500).send(error)
     }
   },
 
-  validate(req, res, next) {
+  async validate(req, res, next) {
+    const [, token] = req.headers['authorization'].split(' ')
     try {
-      let token =
-        req.body.token ||
-        req.headers['authorization'] ||
-        req.headers['x-access-token']
+      const payload = await jwt.verify(token)
+      const user = await User.findByPk(payload.user)
 
-      if (token.startsWith('Bearer ')) {
-        // Remove Bearer from string
-        token = token.slice(7, token.length)
+      if (!user) {
+        return res.status(401)
       }
 
-      if (token) {
-        jwt.verify(token, 'node-auth', function(err, decoded) {
-          if (err) {
-            return res
-              .status(500)
-              .send({ message: 'Falha ao autenticar o token!' })
-          } else {
-            req.decoded = decoded
-            next()
-          }
-        })
-      } else {
-        return res.status(403).send({ message: 'Não há token' })
-      }
+      req.auth = user
+
+      next()
     } catch (error) {
-      return res.status(500).send({ error: error.toString() })
+      return res.status(401).send(error)
     }
   }
 }

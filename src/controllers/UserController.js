@@ -1,21 +1,30 @@
 const User = require('../models/User')
+const jwt = require('../utils/jwt')
 
 module.exports = {
   async index(req, res) {
     try {
-      const { id } = req.params
+      const user = await User.findAll()
 
+      return res.json(user)
+    } catch (error) {
+      return res.status(500).send(error)
+    }
+  },
+
+  async show(req, res) {
+    const { id } = req.params
+
+    try {
       if (id) {
         const user = await User.findByPk(id)
 
         return res.json(user)
       }
 
-      const user = await User.findAll()
-
-      return res.json(user)
+      return res.send(req.auth)
     } catch (error) {
-      return res.status(500).send(error.toString())
+      return res.status(500).send(error)
     }
   },
 
@@ -30,7 +39,12 @@ module.exports = {
         password
       })
 
-      return res.json(user)
+      const token = jwt.sign({ user: user.id })
+
+      return res.json({
+        user,
+        token
+      })
     } catch (error) {
       return res.status(500).send(error.toString())
     }

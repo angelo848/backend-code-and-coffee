@@ -5,11 +5,10 @@ describe('Authentication', () => {
     const user = await User.create({
       name: 'Angelo',
       user_name: 'angelo848',
-      email: 'angelo.salles@dcomp.ufs.br',
+      email: 'angelo_848@live.com',
       password: '123456'
     })
-    console.log(user)
 
-    expect(user.email).toBe('angelo.salles@dcomp.ufs.br')
+    expect(user.email).toBe('angelo_848@live.com')
   })
 })

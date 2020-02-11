@@ -3,14 +3,14 @@ const jwt = require('../../utils/jwt')
 
 module.exports = {
   async create(req, res) {
-    const [, hash] = req.headers.authorization.split(' ')
-    const [user_name, password] = Buffer.from(hash, 'base64')
-      .toString()
-      .split(':')
-
     try {
-      let user = await User.findOne({ where: { user_name } })
+      const [, hash] = req.headers.authorization.split(' ')
+      const [user_name, password] = Buffer.from(hash, 'base64')
+        .toString()
+        .split(':')
 
+      let user = await User.findOne({ where: { user_name } })
+      console.log(req.headers.authorization)
       if (!user) {
         return res.status(404).send({ error: 'Username not found' })
       }
@@ -32,8 +32,8 @@ module.exports = {
   },
 
   async validate(req, res, next) {
-    const [, token] = req.headers['authorization'].split(' ')
     try {
+      const [, token] = req.headers['authorization'].split(' ')
       const payload = await jwt.verify(token)
       const user = await User.findByPk(payload.user)
 
